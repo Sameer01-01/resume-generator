@@ -1,3 +1,5 @@
+
+
 const ResumePreview = ({ resumeData }) => {
     const handlePrint = () => {
       window.print();
@@ -5,11 +7,19 @@ const ResumePreview = ({ resumeData }) => {
   
     return (
       <div className="bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-bold mb-4 text-center">Resume Preview</h2>
+        
         
         <div className="space-y-4">
-          <h3 className="text-lg font-bold">{resumeData.name || "Your Name"}</h3>
-          <p>{resumeData.contact || "Your Contact Info"}</p>
+          <h3 className="text-lg text-center font-bold">{resumeData.name || "Your Name"}</h3>
+
+          <div className="flex items-center justify-center gap-5 flex-wrap text-center">
+
+          <p>{resumeData.lkdn || "Linkedin"}</p>
+          <p>{resumeData.gthb || "Github"}</p>
+          <p>{resumeData.prtf || "Portfolio"}</p>
+          <p>{resumeData.cnt || "Phone"}</p>
+          <p>{resumeData.mail || "Email"}</p>
+          </div>
           <div>
             <h4 className="font-bold text-center">Objective</h4>
             <p>{resumeData.objective || "Your Objective"}</p>
