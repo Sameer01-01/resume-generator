@@ -13,6 +13,9 @@ function App() {
         <Route path="/resume-preview" element={<ResumePreview resumeData={resumeData} />} />
       </Routes>
     </Router>
+    
+
+
   );
 }
 
