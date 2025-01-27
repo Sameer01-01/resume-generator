@@ -11,28 +11,28 @@ const ResumeForm = ({ setResumeData }) => {
     setResumeData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleExperienceChange = (id, value) => {
+  const handleExperienceChange = (id, updatedField) => {
     const updatedExperiences = experienceFields.map((field) =>
-      field.id === id ? { ...field, value } : field
+      field.id === id ? { ...updatedField } : field
     );
     setExperienceFields(updatedExperiences);
     setResumeData((prevData) => ({
       ...prevData,
-      experiences: updatedExperiences.map((field) => field.value),
+      experiences: updatedExperiences,
     }));
-  };
+  };  
 
-  const handleProjectChange = (id, value) => {
+  const handleProjectChange = (id, updatedValue) => {
     const updatedProjects = projectFields.map((field) =>
-      field.id === id ? { ...field, value } : field
+      field.id === id ? { ...field, value: updatedValue } : field
     );
     setProjectFields(updatedProjects);
     setResumeData((prevData) => ({
       ...prevData,
-      projects: updatedProjects.map((field) => field.value),
+      projects: updatedProjects.map((project) => project.value), // 
     }));
   };
-
+  
   const handleAchievementChange = (id, value) => {
     const updatedAchievements = achievementFields.map((field) =>
       field.id === id ? { ...field, value } : field
@@ -45,8 +45,12 @@ const ResumeForm = ({ setResumeData }) => {
   };
 
   const addExperienceField = () => {
-    setExperienceFields([...experienceFields, { id: Date.now(), value: "" }]);
+    setExperienceFields([
+      ...experienceFields,
+      { id: Date.now(), organization: "", role: "", duration: "", responsibilities: "" },
+    ]);
   };
+  
 
   const removeExperienceField = (id) => {
     const updatedExperiences = experienceFields.filter((field) => field.id !== id);
@@ -193,33 +197,64 @@ const ResumeForm = ({ setResumeData }) => {
         </div>
 
         {/* Experience */}
-        <div>
-          <h4 className="font-bold">Experience</h4>
-          {experienceFields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2 mb-2">
-              <textarea
-                placeholder={`Experience ${index + 1}`}
-                value={field.value}
-                onChange={(e) => handleExperienceChange(field.id, e.target.value)}
-                className="flex-1 p-2 border rounded"
-              />
-              <button
-                type="button"
-                onClick={() => removeExperienceField(field.id)}
-                className="p-2 bg-red-500 text-white rounded"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={addExperienceField}
-            className="mt-2 p-2 bg-blue-500 text-white rounded"
-          >
-            Add Experience
-          </button>
-        </div>
+       
+<div>
+  <h4 className="font-bold">Experience</h4>
+  {experienceFields.map((field, index) => (
+    <div key={field.id} className="flex flex-col gap-2 mb-4 p-2 border rounded">
+      <input
+        type="text"
+        placeholder={`Organization Name`}
+        value={field.organization || ""}
+        onChange={(e) =>
+          handleExperienceChange(field.id, { ...field, organization: e.target.value })
+        }
+        className="w-full p-2 border rounded"
+      />
+      <input
+        type="text"
+        placeholder={`Role`}
+        value={field.role || ""}
+        onChange={(e) =>
+          handleExperienceChange(field.id, { ...field, role: e.target.value })
+        }
+        className="w-full p-2 border rounded"
+      />
+      <input
+        type="text"
+        placeholder={`Duration`}
+        value={field.duration || ""}
+        onChange={(e) =>
+          handleExperienceChange(field.id, { ...field, duration: e.target.value })
+        }
+        className="w-full p-2 border rounded"
+      />
+      <textarea
+        placeholder={`Responsibilities`}
+        value={field.responsibilities || ""}
+        onChange={(e) =>
+          handleExperienceChange(field.id, { ...field, responsibilities: e.target.value })
+        }
+        className="w-full p-2 border rounded"
+      />
+      <button
+        type="button"
+        onClick={() => removeExperienceField(field.id)}
+        className="p-2 bg-red-500 text-white rounded"
+      >
+        Delete
+      </button>
+    </div>
+  ))}
+  <button
+    type="button"
+    onClick={addExperienceField}
+    className="mt-2 p-2 bg-blue-500 text-white rounded"
+  >
+    Add Experience
+  </button>
+</div>
+
 
         {/* Projects */}
         <div>
