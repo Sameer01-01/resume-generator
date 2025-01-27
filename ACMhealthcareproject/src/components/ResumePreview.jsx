@@ -29,6 +29,8 @@ const ResumePreview = ({ resumeData }) => {
     <div className="bg-gray-100 p-10 rounded shadow">
       {/* Personal Details */}
       <h1 className="text-3xl font-bold mb-2">{name}</h1>
+
+    
       <div className="flex flex-wrap gap-4 text-blue-600">
         <a href={lkdn} target="_blank" rel="noopener noreferrer">
           LinkedIn
@@ -42,13 +44,13 @@ const ResumePreview = ({ resumeData }) => {
         <p>Contact: {cnt}</p>
         <p>Email: {mail}</p>
       </div>
-
+<hr className="h-5"/>
       {/* Introduction */}
       <section className="my-6">
         <h2 className="text-xl font-bold mb-2">About Me</h2>
         <p>{intro}</p>
       </section>
-
+<hr />
       {/* Skills */}
       <section className="my-6">
         <h2 className="text-xl font-bold mb-2">Skills</h2>
@@ -56,7 +58,7 @@ const ResumePreview = ({ resumeData }) => {
         <p>{skillsl2}</p>
         <p>{skillsl3}</p>
       </section>
-
+<hr />
       {/* Education */}
       <section className="my-6">
         <h2 className="text-xl font-bold mb-2">Education</h2>
@@ -68,7 +70,7 @@ const ResumePreview = ({ resumeData }) => {
           {grdyear} - {grdyear2}
         </p>
       </section>
-
+<hr />
       {/* Experience */}
       <section className="my-6">
         <h2 className="text-xl font-bold mb-2">Experience</h2>
@@ -85,20 +87,25 @@ const ResumePreview = ({ resumeData }) => {
           <p>No experiences added yet.</p>
         )}
       </section>
-
+<hr />
       {/* Projects */}
       <section className="my-6">
         <h2 className="text-xl font-bold mb-2">Projects</h2>
-        {projects && projects.length > 0 ? (
+        {experiences && experiences.length > 0 ? (
           <ul className="list-disc pl-5">
-            {projects.map((project, index) => (
-              <li key={index}>{project}</li>
+            {experiences.map((exp, index) => (
+              <li key={index}>
+                <strong>{exp.project}</strong> - {exp.desc} {exp.durn} <br />
+                
+              </li>
             ))}
           </ul>
         ) : (
-          <p>No projects added yet.</p>
+          <p>No experiences added yet.</p>
         )}
       </section>
+
+      <hr />
 
       {/* Achievements */}
       <section className="my-6">
